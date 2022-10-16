@@ -9,6 +9,16 @@ class Contacts extends CI_Controller
         $this->load->view('contacts/index', $data);
     }
 
+    public function details($id = FALSE)
+    {
+        if ($id == FALSE) {
+            header('Location: ' . 'index');
+        }
+        $data['contact'] = $this->contact_model->get_contacts($id);
+
+        $this->load->view('contacts/details', $data);
+    }
+
     public function add_edit($id = false)
     {       
         if (!$id) {

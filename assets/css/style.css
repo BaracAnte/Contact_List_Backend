@@ -155,7 +155,7 @@ a.article:hover {
 	top: -3px;
 	position: relative;
 }
-#contactTable a {
+#contactTable a, .green_text {
 	color: #0c6;
 }
 .create_btn {
@@ -172,20 +172,6 @@ a.article:hover {
 }
 #post_save {
 	margin-top: 1em;
-}
-.form_row {
-	padding: 0.5em;
-	border: 1px solid #cecece;
-	border-radius: 5px;
-}
-.foo .form-group {
-	max-width: 40%;
-}
-.form_row .form-group {
-	margin-bottom: 0;
-	display: inline-block;
-	padding-right: 0.5em;
-	width: 85%;
 }
 .add_btn {
 	margin-top: 0em;

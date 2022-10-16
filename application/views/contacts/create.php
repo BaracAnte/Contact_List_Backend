@@ -15,9 +15,9 @@
     </div>
     <div class="form-group col-md-6 p-3 d-inline">
         <?php if ($function == 'edit') : ?>
-            <button type="submit" class="border btn btn-light float-right form-group mt-3 ml-4">Delete</button>
+            <a onclick="return confirm('Are you sure to delete?')" href="/contacts/delete/<?= $contact->id ?>" type="submit" class="border btn btn-light float-right form-group mt-3 ml-4">Delete</a>
         <?php endif; ?>
-        <button type="submit" class="border btn btn-light float-right form-group mt-3 ml-4">Cancel</button>
+        <button onclick="location.href = '/contacts/index';" type="submit" class="border btn btn-light float-right form-group mt-3 ml-4">Cancel</button>
         <button type="submit" class="border btn btn-light float-right form-group mt-3 ml-4">Save</button>
     </div>
     <div class="col-md-6">
@@ -40,21 +40,21 @@
         $phone_number_count = count($contact->phone_numbers);
         ?>
         <?php foreach ($contact->phone_numbers as $key => $phone_numbers) : ?>
-            <div class="panel form-group border p-2 col-md-12">
+            <div class="panel border pt-3 col-md-12">
                 <input type="text" class="form-control col-5 d-inline" name="phone_label[<?= $key ?>][phone]" value="<?= $phone_numbers->phone ?>" placeholder="phone number">
                 <input type="text" class="form-control col-5 d-inline" name="phone_label[<?= $key ?>][label]" value="<?= $phone_numbers->label ?>" placeholder="details">
-                <a href="#" class="btn text-success remove_btn d-inline">Delete</a>
+                <a href="#" class="btn text-success float-right remove_btn d-inline">Delete</a>
                 <input type="hidden" name="phone_label[<?= $key ?>][id]" value=<?= $phone_numbers->id ?>><br>
                 <input type="hidden" value=<?= $contact->id ?>><br>
             </div>
         <?php endforeach; ?>
-        <div class="panel form-group border p-2 col-md-12">
+        <div class="panel border pt-3 pb-3 col-md-12">
             <input type="text" class="form-control col-5 d-inline" name="phone_label[<?= $phone_number_count ?>][phone]" placeholder="phone number">
             <input type="text" class="form-control col-5 d-inline" name="phone_label[<?= $phone_number_count ?>][label]" placeholder="details">
-            <a href="#" class="btn text-success remove_btn d-inline">Delete</a>
+            <a href="#" class="btn text-success float-right remove_btn d-inline">Delete</a>
         </div>
     </div>
-    <a href="#" class="btn text-success add_btn" id="add_new">Add number</a>
+    <a href="#" class="btn text-success mt-2 add_btn" id="add_new">Add number</a>
     <input type="hidden" name="id" value=<?= $contact->id ?>><br>
     <input type="hidden" id="index_number" value=<?= $phone_number_count ?>><br>
     </form>

@@ -19,7 +19,8 @@
         <?php foreach ($contacts as $contact) : ?>
             <tr>
                 <td class="small_td"><img src="/assets/images/<?php echo $contact['image']; ?>" style="width: 40px;height: 40px;border-radius: 30px;"></td>
-                <td><?= $contact['fullname'] ?>
+                <td onclick="location.href = '/contacts/details/<?= $contact['id'] ?>';" role='button'>
+                    <?= $contact['fullname'] ?>
                     <br>
                     <?= $contact['email'] ?>
                 </td>

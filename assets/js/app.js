@@ -70,10 +70,10 @@ $(document).ready(function () {
   $('#add_new').click(function () {
     var index_number = parseFloat($('#index_number').val()) +1;
 
-    var new_number = '<div class="panel form-group border p-2 col-md-12">'+
+    var new_number = '<div class="panel border pt-2 pb-3 col-md-12">'+
                       '<input type="text" class="form-control col-5 d-inline" name="phone_label['+index_number+'][phone]" placeholder="phone number">  '+
                       '<input type="text" class="form-control col-5 d-inline" name="phone_label['+index_number+'][label]" placeholder="details">'+
-                      '<a href="#" class="btn text-success remove_btn d-inline">Delete</a>'+
+                      '<a href="#" class="btn text-success float-right remove_btn d-inline">Delete</a>'+
                     '</div>';
         $('#phoneNumber_list').append(new_number);
         $('#index_number').val(index_number);
