@@ -14,8 +14,11 @@ class Contact_model extends CI_Model
         $this->load->model('Phone_number_model');
     }
 
-    public function get_contacts($id = FALSE, $favorite = 'no')
+    public function get_contacts($id = FALSE, $favorite = 'no' , $limit = FALSE, $offset = FALSE)
     {
+        if($limit){
+            $this->db->limit($limit, $offset);
+        }
         if ($id === FALSE) {
             if ($favorite == 'yes') {
                 $this->db->where('contacts.favorite', 1);
@@ -47,7 +50,7 @@ class Contact_model extends CI_Model
         $inserted_id = $this->db->insert_id();
         $this->Phone_number_model->insert_phone_numbers($inserted_id);
 
-        return true;
+        return $inserted_id;
     }
 
     public function update_contact($image)

@@ -1,9 +1,10 @@
 <?php
 class Contacts extends CI_Controller
 {
-    public function index()
+    public function index($offset = 0)
     {
-        $data['contacts'] = $this->contact_model->get_contacts(FALSE);
+        $config = $this->pagination_settings('index');
+        $data['contacts'] = $this->contact_model->get_contacts(FALSE, 'no', $config['per_page'], $offset);
         $data['favorite'] = 'no';
 
         $this->load->view('contacts/index', $data);
@@ -20,7 +21,7 @@ class Contacts extends CI_Controller
     }
 
     public function add_edit($id = false)
-    {       
+    {
         if (!$id) {
             $data['contact'] = new $this->contact_model();
             $data['function'] = 'create';
@@ -64,16 +65,17 @@ class Contacts extends CI_Controller
         }
     }
 
-    public function favorites()
+    public function favorites($offset = 0)
     {
-        $data['contacts'] = $this->contact_model->get_contacts(FALSE, 'yes');
+        $config = $this->pagination_settings('favorites', '1');
+        $data['contacts'] = $this->contact_model->get_contacts(FALSE, 'yes', $config['per_page'], $offset);
         $data['favorite'] = 'yes';
 
         $this->load->view('contacts/index', $data);
     }
 
     public function find()
-    {
+    {        
         $input = $this->input->post('input');
         $favorite = $this->input->post('favorite');
 
@@ -108,5 +110,23 @@ class Contacts extends CI_Controller
             $image = $data['upload_data']['file_name'];
         }
         return $image;
+    }
+
+    public function pagination_settings($function_name, $favorite = FALSE)
+    {
+        // Pagination Config	
+        $config['base_url'] = '/contacts/'.$function_name.'/';
+        if ($favorite) {
+            $this->db->where('favorite', $favorite);
+        }
+        $config['total_rows'] = $this->db->count_all_results('contacts');
+        $config['per_page'] = 10;
+        $config['uri_segment'] = 3;
+        $config['attributes'] = array('class' => 'pagination-link');
+
+        // Init Pagination
+        $this->pagination->initialize($config);
+
+        return $config;
     }
 }

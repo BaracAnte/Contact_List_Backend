@@ -45,5 +45,7 @@
         <?php endforeach; ?>
     </tbody>
 </table>
-
+<div class="pagination-links">
+		<?php echo $this->pagination->create_links(); ?>
+</div>
 <?php $this->load->view('templates/footer'); ?>
